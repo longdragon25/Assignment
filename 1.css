@@ -1,0 +1,8 @@
+.changeColorMessage{
+    width: 800px;
+    background-color: greenyellow;
+}
+.changeColorAlert{
+    width: 800px;
+    background-color: red;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week1_Assignment</title>
+    <link rel="stylesheet" href="1.css" />
+</head>
+<body>
+    <div id="message">Wellcome to the game!</div>
+    <div id="more"></div>
+    <input type="number" id="number">
+    <button id="guessButton">Guess</button>
+</body>
+</html>
+<script>
+    var goalNumber= Math.floor(Math.random() * 30);
+    var arr=[];
+    var turn = 10;
+    console.log(goalNumber);
+    var button=document.getElementById("guessButton");
+    button.addEventListener('click',function(){
+         var guessNumber=parseInt(document.getElementById("number").value);
+        if(goalNumber===guessNumber){
+            document.getElementById("message").innerHTML=`<h3>CONGRATULATIONS! ${guessNumber} was correct answer! It look you ${turn} tries to guess the answer</h3>`
+            document.getElementById("more").innerHTML=`<h3>Your past guesses is ${arr.map((x)=>x)}</h3>`
+            document.getElementById("guessButton").disabled = true;
+        }
+        else if(guessNumber>goalNumber)
+        {
+            arr.push(guessNumber);
+            turn--;
+            document.getElementById("message").innerHTML=`<h3>Sorry your guess is too high, guess lower. You have ${turn} guess left</h3>`
+        }
+        else if(guessNumber<goalNumber)
+        {
+            arr.push(guessNumber);
+            turn--;
+            document.getElementById("message").innerHTML=`<h3>Sorry your guess is too low, guess higher. You have ${turn} guess left</h3>`
+        }
+        var a=document.getElementById("message");
+        if(goalNumber===guessNumber){
+            a.classList.add('changeColorMessage');
+            a.classList.remove('changeColorAlert');
+        }
+        else if(guessNumber>goalNumber || guessNumber<goalNumber){
+            a.classList.add('changeColorAlert');
+            a.classList.remove('changeColorMessage');
+        }
+        if(turn===0){
+            a.innerHTML="<h1>END GAME! Better luck next time! </h1>"
+            a.classList.add('changeColorAlert');
+            document.getElementById("guessButton").disabled = true;
+        }
+    })
+</script>
